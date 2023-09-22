@@ -1,0 +1,15 @@
+module.exports = {
+    host: "https://api.webflow.com",
+    rootDir: "./devlink",
+    siteId: "6503a8903ae81612c6696eb5",
+    authToken: "[YOUR API TOKEN]", 
+    cssModules: true
+  }
+
+  module.exports = {
+    host: "https://api.webflow.com",
+    rootDir: "./devlink1",
+    siteId: "60a5ad862f20836237dc00cc",
+    authToken: "[YOUR API TOKEN]", 
+    cssModules: true
+  }

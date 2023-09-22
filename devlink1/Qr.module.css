@@ -1,0 +1,165 @@
+.divbackgroundblackpl {
+  position: fixed;
+
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+
+  background-color: hsla(0, 0.00%, 0.00%, 0.41);
+}
+
+.divwindowpl {
+  position: static;
+
+  width: 340px;
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
+
+  border-radius: 30px;
+
+  background-color: hsla(0, 0.00%, 100.00%, 1.00);
+}
+
+.div1portpl {
+  display: flex;
+  justify-content: space-around;
+}
+
+.div1apl {
+  display: flex;
+  width: 113.3px;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.imagepl {
+  margin-top: 30px;
+}
+
+.div1xpl {
+  display: flex;
+  width: 113.3px;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.linkblockxpl {
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.xmouseover2pl {
+  width: 40px;
+  height: 40px;
+  padding: 12px;
+  background-color: hsla(113, 31.25%, 0.00%, 0.00);
+  opacity: 0.33;
+}
+
+.xmouseover2pl:hover {
+  opacity: 0.81;
+}
+
+.xmouseover2pl:active {
+  opacity: 1;
+}
+
+.text1portpl {
+  margin-top: 25px;
+  font-family: Ubuntu, Helvetica, sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.text2portpl {
+  margin: 25px 20px;
+  font-family: Ubuntu, Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+.divqrpl {
+  display: flex;
+  padding-right: 20px;
+  padding-left: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.div-buttonpl {
+  display: flex;
+  padding-right: 20px;
+  padding-left: 20px;
+  flex-direction: column;
+}
+
+.textlink1pl {
+  font-family: Ubuntu, Helvetica, sans-serif;
+  color: hsla(0, 0.00%, 0.00%, 1.00);
+  font-size: 14px;
+  text-align: center;
+}
+
+.link-2 {
+  color: hsla(21.428571428571416, 23.08%, 35.69%, 1.00);
+  text-decoration: none;
+}
+
+.link-2:hover {
+  text-decoration: underline;
+}
+
+.buttonpl {
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 6px;
+  padding-top: 15px;
+
+  border-radius: 12px;
+
+  background-color: #d6c9c5;
+
+  font-family: Ubuntu, Helvetica, sans-serif;
+  color: #705546;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.buttonpl:hover {
+  background-color: hsla(13.636363636363601, 28.64%, 86.61%, 1.00);
+}
+
+.buttonpl:active {
+  background-color: hsla(14.117647058823481, 42.87%, 94.94%, 1.00);
+  color: hsla(21.428571428571416, 23.47%, 56.74%, 1.00);
+}
+
+.divdownloadpl {
+  margin-top: 31px;
+}
+
+.textlink2pl {
+  margin-top: -6px;
+  margin-bottom: -31px;
+
+  font-family: Ubuntu, Helvetica, sans-serif;
+  color: hsla(0, 0.00%, 100.00%, 1.00);
+  font-size: 14px;
+  text-align: center;
+}
+
+.linkpl {
+  color: hsla(0, 0.00%, 100.00%, 1.00);
+  text-decoration: none;
+}
+
+.linkpl:hover {
+  text-decoration: underline;
+}

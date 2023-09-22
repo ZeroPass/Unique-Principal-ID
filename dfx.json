@@ -1,0 +1,29 @@
+{
+  "canisters": {
+    "icpPort_backend": {
+      "main": "src/icpPort_backend/main.mo",
+      "type": "motoko"
+    },
+    "icpPort_frontend": {
+      "dependencies": [
+        "icpPort_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/icpPort_frontend/src/index.html"
+      },
+      "source": [
+        "src/icpPort_frontend/assets",
+        "dist/icpPort_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

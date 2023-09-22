@@ -1,0 +1,15 @@
+.upidsection2 {
+  height: 100%;
+  padding-top: 74px;
+  background-color: hsla(268.0851063829787, 0.00%, 21.56%, 1.00);
+}
+
+.headingsection2 {
+  color: var(--paleTurquoise-ce3fb764);
+  font-size: 30px;
+}
+
+.paragraphsection2 {
+  font-family: Exo, sans-serif;
+  color: hsla(0, 0.00%, 100.00%, 1.00);
+}
