@@ -7,3 +7,7 @@ Frontend webapp written in:
   Details:
   
 - ICP hackaton
+
+# How to start
+- npm install -r requirements.txt
+- npm start
