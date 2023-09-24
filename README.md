@@ -1,4 +1,4 @@
-# ICP network - Passport attestation of princpipal ID
+# Unique Principal Identity (UPID) - Passport attestation of Princpipal ID
 Frontend webapp written in:
 
 -  nodejs
