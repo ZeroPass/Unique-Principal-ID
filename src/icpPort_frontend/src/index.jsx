@@ -25,8 +25,8 @@ import "./qr";
 //CONSTANTS FOR TESTING
 
 //ICP server:
-const ICP_SERVER = "http://127.0.0.1:4943";
-const ICP_BACKEND_CANISTER_ID = "bkyz2-fmaaa-aaaaa-qaaaq-cai"; //'42bix-wqaaa-aaaak-ae6ya-cai'
+const ICP_SERVER = "https://ic0.app"; //http://127.0.0.1:4943";
+const ICP_BACKEND_CANISTER_ID = '42bix-wqaaa-aaaak-ae6ya-cai'; // "bkyz2-fmaaa-aaaaa-qaaaq-cai"
 const DEMO = true;
 
 var INTERVAL_ID = null;
@@ -159,7 +159,6 @@ const MyHello = () => {
         if (INTERVAL_ID) {
           clearInterval(INTERVAL_ID);
         }
-        clearInterval(this.interval);
         console.log("To many attempts");
         setStatusMessage("Timeout! Principal is not attested!", true);
         return;
