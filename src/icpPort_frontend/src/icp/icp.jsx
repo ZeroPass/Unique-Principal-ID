@@ -71,15 +71,15 @@ export class ICP {
     //function will call the canister with the given principal to get information if the principal is attested
     async isAttested(principal){
           console.log("getting info if attested...");
-          const result = await this.actor.is_attested(Principal.fromText(principal));
-          console.log("..response arrived");
+          var result = await this.actor.is_attested(principal);
+          console.log("..response arrived")
           return result;
     }
 
     //function will call the canister with the given principal to get information about the attestation
     async getAttestationInfo(principal){
         console.log("getting attestation info...");
-        const result = await this.actor.get_attestation(Principal.fromText(principal));
+        var result = await this.actor.get_attestation(Principal.fromText(principal));
         console.log("getting attestation info is done...");
         return result;
     }

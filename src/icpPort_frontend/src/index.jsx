@@ -15,7 +15,7 @@ import "../../../devlink/global.css";
 import "../../../devlink1/global.css";
 import "../../../devlink/UicpBody1.module.css";
 import "../../../devlink1/Qr.module.css";
-import { UicpBody1 } from "../../../devlink/"
+import { UicpBody1, UpidSection2 } from "../../../devlink/"
 import { Qr } from "../../../devlink1/"
 
 import { getUid } from "./tool/tools";
@@ -29,62 +29,84 @@ const ICP_SERVER = "http://127.0.0.1:4943";
 const ICP_BACKEND_CANISTER_ID = "bkyz2-fmaaa-aaaaa-qaaaq-cai"; //'42bix-wqaaa-aaaak-ae6ya-cai'
 const DEMO = true;
 
-
+var INTERVAL_ID = null;
 
 const MyHello = () => {
+
   const [isValid, setIsValid] = React.useState(false);
   const [id, setID] = React.useState("");
   const [isOpen, setIsOpen] = React.useState(false);
   const [dynamicLink, setDynamicLink] = React.useState("");
   
-  const callRepeatedly = async (asyncFunction, interval, duration) =>{
-    let startTime = Date.now();
 
-    const intervalId = setInterval(async () => {
-        if (Date.now() - startTime > duration) {
-            clearInterval(intervalId);
-        } else {
-            let result = await asyncFunction();
-            if (result) {
-                clearInterval(intervalId);
-            }
-        }
-    }, interval);
+
+  const setStatusMessage = (message, isError) => {
+    const statusDiv = document.getElementById('statusElement');
+    if (message == ""){
+      statusDiv.style.display = "none";
+      return;
+    }
+    statusDiv.style.display = "block";
+    statusDiv.innerHTML = message;
+    if (isError){
+      statusDiv.style.color = "red";
+    }
+    else{
+      statusDiv.style.color = "green";
+    }
   }
+
   
   const submit = async () => {
-    const successdiv = document.getElementById('divsuccess');
-    successdiv.style.display = "block";
-    return;
+    //clearing interval if there is more sessions
+    if (INTERVAL_ID) {
+      clearInterval(INTERVAL_ID);
+    }
 
+    //create ICP connector
+    try{
     var ICPconnector = await ICP.create(ICP_SERVER, ICP_BACKEND_CANISTER_ID);
-    
-    //from server log: "b'|-zS\\xff\\x80-9?\\xf7\\xb5\\xbc\"\\xb0+R\\x81\\x10\\xa4-\\xdb\\x90L\\x90\\x85\\xefY)\\x02'" 
-    //const ret = await get_uid([124, 45, 122, 83, 255, 128, 45, 57, 63, 247, 181, 188, 34, 176, 43, 82, 129, 16, 164, 45, 219, 144, 76, 144, 133, 239, 89, 41, 2]);
-    //const somoe = getUid("xvjwh-ql4fv-5fh74-afu4t-755vx-qrlak-2sqei-kilo3-sbgjb-bpple-uqe");
-
+    }
+    catch (error){
+      setStatusMessage("Error connecting to ICP backend", true);
+      return false;
+    }
 
     //submit button pressed, check if input is correct, tell that is not correct. If id is correct open QR popup
     if (!isValid){
-      alert("Principal is not valid or empty");
+      setStatusMessage("Principal is not valid or empty", true);
       return false;
     }
-
+    //xvjwh-ql4fv-5fh74-afu4t-755vx-qrlak-2sqei-kilo3-sbgjb-bpple-uqe
+    var principal = null;
     try {
-      const principal = Principal.fromText(id);
+      principal = Principal.fromText(id);
     }
     catch (error) {
-      alert("Principal is not in valid format");
+      console.log("Principal is not in valid format" + error);
+      setStatusMessage("Principal is not in valid format", true);
       return false;
     }
 
+    //correct format of principal
+    setStatusMessage("Waiting to complete attestation...", false);
+    var uid = getUid(principal); //bytes -> sha256 -> base64 -> utf8
 
-    var uid = getUid(id); //bytes -> sha256 -> base64 -> utf8
-
+    setStatusMessage("Checking if principal is already attested ...", false);
     //check if the id has been already attested
-    var isAttested = await ICPconnector.isAttested(id);
-    if (isAttested && !DEMO){
-      alert("Principal is already attested");
+    var isAttested = null;
+    try{
+      isAttested = await ICPconnector.isAttested(principal);
+      console.log("Is principal already attested? :" + isAttested);
+    }
+    catch (error){
+      console.log("Error connecting to ICP backend" + error);
+      setStatusMessage("Error connecting to ICP backend", true);
+      return false;
+    }
+    if (isAttested){
+      setStatusMessage("Principal is already attested!", false);
+      console.log("Principal is already attested");
       return false;
     }
 
@@ -116,20 +138,38 @@ const MyHello = () => {
                   document.getElementById('zeropass-port-qr')
                   );
     setDynamicLink(dynamicLink);
+    setStatusMessage("Principal is not attested yet. Please wait...(attempt 1)", false);              
 
+    let maxCalls = 20; // 10 attempts
+    let callCount = 0;
     //next 10 minutes call repeatedly the isAttested function
-    callRepeatedly(async () => {
-      var isAttested = await ICPconnector.isAttested(id);
-      if (isAttested){
+    const intervalId = setInterval (async() => {
+      callCount++;
+      var isAttested = await ICPconnector.isAttested(principal);
+      var outOfScope = callCount >= maxCalls
+      if (isAttested) {
+        if (INTERVAL_ID) {
+          clearInterval(INTERVAL_ID);
+        }
         console.log("Principal is attested");
-        //show on the screen that the principal is attested
-        return true;
+        setStatusMessage("Success! Principal is attested!", false);
+        return;
       }
-      console.log("Principal is not attested");
-      return false;
-    }, 1000, 600000); //10 minutes
+      if (outOfScope) {
+        if (INTERVAL_ID) {
+          clearInterval(INTERVAL_ID);
+        }
+        clearInterval(this.interval);
+        console.log("To many attempts");
+        setStatusMessage("Timeout! Principal is not attested!", true);
+        return;
+      }
 
-    //start checking if the is attested
+      console.log("Principal is not attested");
+      setStatusMessage("Principal is not attested yet. Please wait... (attempt " + (callCount + 1) + ")", false);
+
+    }, 5000); // 10 seconds
+    INTERVAL_ID = intervalId;
     return true;
   }
 
@@ -157,17 +197,17 @@ const MyHello = () => {
     //check if the input is correct, set id and isValid variable
     const patternString = "^[a-zA-Z0-9-]+$";
     const value = e.target.value;
-    console.log(value);
     try {
       const pattern = new RegExp(patternString);
       var validation = pattern.test(value);
       setID(value);
       setIsValid(validation);
-      if (!validation)
+      if (!validation && value != "")
        throw ("Not valid character");
+      setStatusMessage("", false);
     } catch (error) {
       setIsValid(false);
-      alert("Not allowed character.\n\nOnly characters, numbers and character '-' is allowed.")
+      setStatusMessage("Not allowed character.\n\nOnly characters, numbers and character '-' is allowed.", true)
     }
     return true;
 }
@@ -184,6 +224,7 @@ return (
       onChange: inputChanged
     }}
   />
+  <UpidSection2/>
     {isOpen && <Popup
       content={<>
         <div style={{ }}>

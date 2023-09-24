@@ -5,5 +5,7 @@ declare function UicpBody1(props: {
   as?: React.ElementType;
   inputInternetIdentityRuntimeProps?: Types.Devlink.RuntimeProps;
   submitButtonRuntimeProps?: Types.Devlink.RuntimeProps;
-  formStatusRuntimeProps?: Types.Devlink.RuntimeProps;
+  normalRuntimeProps?: Types.Devlink.RuntimeProps;
+  errorRuntimeProps?: Types.Devlink.RuntimeProps;
+  successRuntimeProps?: Types.Devlink.RuntimeProps;
 }): React.JSX.Element;

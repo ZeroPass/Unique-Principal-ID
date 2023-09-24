@@ -13,3 +13,7 @@
   font-family: Exo, sans-serif;
   color: hsla(0, 0.00%, 100.00%, 1.00);
 }
+
+.upidlink {
+  color: var(--paleTurquoise-ce3fb764);
+}

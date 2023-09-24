@@ -12,7 +12,9 @@ export function UicpBody1({
   as: _Component = _Builtin.Section,
   inputInternetIdentityRuntimeProps = {},
   submitButtonRuntimeProps = {},
-  formStatusRuntimeProps = {},
+  normalRuntimeProps = {},
+  errorRuntimeProps = {},
+  successRuntimeProps = {},
 }) {
   _interactions.useInteractions(_interactionsData, _styles);
 
@@ -61,7 +63,7 @@ export function UicpBody1({
           >
             <_Builtin.FormWrapper
               className={_utils.cx(_styles, "form-block")}
-              {...formStatusRuntimeProps}
+              {...normalRuntimeProps}
             >
               <_Builtin.FormForm
                 className={_utils.cx(_styles, "form")}
@@ -93,17 +95,14 @@ export function UicpBody1({
                   {...submitButtonRuntimeProps}
                 />
               </_Builtin.FormForm>
-              <_Builtin.FormSuccessMessage>
-                <_Builtin.Block id="divsuccess">
-                  {"Thank you! Your submission has been received!"}
-                </_Builtin.Block>
-              </_Builtin.FormSuccessMessage>
-              <_Builtin.FormErrorMessage>
-                <_Builtin.Block id="diverror">
-                  {"Oops! Something went wrong while submitting the form."}
-                </_Builtin.Block>
-              </_Builtin.FormErrorMessage>
+              <_Builtin.FormSuccessMessage />
+              <_Builtin.FormErrorMessage />
             </_Builtin.FormWrapper>
+            <_Builtin.Block
+              className={_utils.cx(_styles, "text-block")}
+              tag="div"
+              id="statusElement"
+            />
           </_Builtin.HFlex>
         </_Builtin.VFlex>
       </_Builtin.BlockContainer>
