@@ -1,13 +1,14 @@
-# Unique Principal Identity (UPID) - Passport attestation of Princpipal ID
-Frontend webapp written in:
+# Unique Principal Identity (UPID)
+Passport attestation of Principal ID
+
+## Frontend
+Webapp is written in:
 
 -  nodejs
 -  react
 
-  Details:
-  
-- ICP hackaton
+ It's a PoC for ICP hackathon
 
-# How to start
+## How to start
 - npm install -r requirements.txt
 - npm start
