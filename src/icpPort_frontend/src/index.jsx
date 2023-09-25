@@ -3,6 +3,7 @@ import { render } from "react-dom";
 //import { Popup } from 'reactjs-popup';
 import Popup from './popup';
 import 'reactjs-popup/dist/index.css';
+import './fonts.css';
 
 import { Principal } from '@dfinity/principal';
 
@@ -224,15 +225,6 @@ return (
     }}
     inputInternetIdentityRuntimeProps={{
       onChange: inputChanged
-    }}
-    updateImageLinkRuntimeProps={{
-      onLoad: () => {
-        // change url
-        const imgElement = document.getElementById('logoImage');
-        if (imgElement) {
-          imgElement.src = PassportImage;
-        }
-      }
     }}
   />
   <UpidSection2/>

@@ -1,0 +1,39 @@
+/* Exo Regular */
+@font-face {
+    font-family: 'Exo';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../assets/Exo/static/Exo-Regular.ttf') format('truetype');
+}
+
+/* Exo Semi-Bold */
+@font-face {
+    font-family: 'Exo';
+    font-weight: 600;
+    font-style: normal;
+    src: url('../assets/Exo/static/Exo-SemiBold.ttf') format('truetype');
+}
+
+/* Ubuntu Regular */
+@font-face {
+    font-family: 'Ubuntu';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../assets/Ubuntu/Ubuntu-Regular.ttf') format('truetype');
+}
+
+/* Ubuntu Bold */
+@font-face {
+    font-family: 'Ubuntu';
+    font-weight: 700;
+    font-style: normal;
+    src: url('../assets/Ubuntu/Ubuntu-Bold.ttf') format('truetype');
+}
+
+/* Vollkorn Bold */
+@font-face {
+    font-family: 'Vollkorn';
+    font-weight: 700;
+    font-style: normal;
+    src: url('../assets/Vollkorn/static/Vollkorn-Bold.ttf') format('truetype');
+}
