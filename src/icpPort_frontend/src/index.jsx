@@ -14,11 +14,14 @@ import { ICP } from "./icp/icp";
 import "../../../devlink/global.css";
 import "../../../devlink1/global.css";
 import "../../../devlink/UicpBody1.module.css";
+import "../../../devlink/UpidSection2.module.css";
 import "../../../devlink1/Qr.module.css";
 import { UicpBody1, UpidSection2 } from "../../../devlink/"
 import { Qr } from "../../../devlink1/"
 
 import { getUid } from "./tool/tools";
+
+import PassportImage from '../assets/passport.svg'; 
 
 import "./qr";
 
@@ -221,6 +224,15 @@ return (
     }}
     inputInternetIdentityRuntimeProps={{
       onChange: inputChanged
+    }}
+    updateImageLinkRuntimeProps={{
+      onLoad: () => {
+        // change url
+        const imgElement = document.getElementById('logoImage');
+        if (imgElement) {
+          imgElement.src = PassportImage;
+        }
+      }
     }}
   />
   <UpidSection2/>

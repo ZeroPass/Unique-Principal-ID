@@ -8,4 +8,5 @@ declare function UicpBody1(props: {
   normalRuntimeProps?: Types.Devlink.RuntimeProps;
   errorRuntimeProps?: Types.Devlink.RuntimeProps;
   successRuntimeProps?: Types.Devlink.RuntimeProps;
+  updateImageLinkRuntimeProps?: Types.Devlink.RuntimeProps;
 }): React.JSX.Element;

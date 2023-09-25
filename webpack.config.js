@@ -19,7 +19,8 @@ module.exports = {
     // to replace the extension to `.js`.
     index: path.join(__dirname, frontend_entry).replace(/\.html$/, ".jsx"),
   },
-  devtool: isDevelopment ? "source-map" : false,
+  devtool: 'eval', // isDevelopment ? "source-map" : false,
+  cache:true, //manualy added
   optimization: {
     minimize: !isDevelopment,
     minimizer: [new TerserPlugin()],
@@ -54,7 +55,18 @@ module.exports = {
   module: {
     rules: [
       { test: /\.(js|ts)x?$/, loader: "ts-loader" },
-      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
+      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-url-loader',
+            options: {
+              limit: 10000,
+            },
+          },
+        ],
+      }
     ]
   },
   plugins: [
